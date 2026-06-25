@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/Hero";
 import { IntroBand } from "@/components/home/IntroBand";
+import { LeadFunnel } from "@/components/funnel/LeadFunnel";
 import { LeistungenPreview } from "@/components/home/LeistungenPreview";
 import { StatsBand } from "@/components/home/StatsBand";
 import { DreiE } from "@/components/home/DreiE";
@@ -12,6 +13,7 @@ export default function HomePage() {
     <main>
       <Hero />
       <IntroBand />
+      <LeadFunnel />
       <LeistungenPreview />
       <StatsBand />
       <DreiE />

@@ -37,7 +37,11 @@ scripts/generate-icons.mjs   Icon-/OG-Generator (sharp)
 - **Impressum:** Handelsregister-Nummer (HRB), zuständiges Registergericht und USt-IdNr. eintragen
   (im Code mit „[bitte ergänzen]“ markiert).
 - **Datenschutz:** Hosting-Anbieter benennen + AVV-Vertrag sicherstellen.
-- **Konfigurator:** Formular an Backend (E-Mail/CRM) anbinden — aktuell Demo ohne Versand
-  (`components/konfigurator/Konfigurator.tsx`). Danach Datenschutz-Abschnitt 5 ggf. ergänzen.
+- **E-Mail-Versand (Lead-Funnel):** Der Startseiten-Funnel (`components/funnel/LeadFunnel.tsx`)
+  sendet die Anfrage bereits an die API-Route `app/api/anfrage/route.ts`. Dort ist der Versand als
+  `TODO` vorbereitet — nur noch einen Mail-Dienst eintragen (z. B. **Resend** oder SMTP/Nodemailer),
+  Empfänger ist `lib/site.ts → email`. Bis dahin wird die Anfrage serverseitig protokolliert.
+- **Konfigurator (Kontaktseite):** läuft weiterhin als Demo ohne Versand
+  (`components/konfigurator/Konfigurator.tsx`) — bei Bedarf ebenfalls auf `/api/anfrage` umstellen.
 - **Domain:** `lib/site.ts → url` ist auf `https://www.glashandel-heinze.de` gesetzt (für OG/Canonical/Sitemap).
 - **Echte Fotos** statt der Platzhalter (`ImagePlaceholder`) einsetzen.
