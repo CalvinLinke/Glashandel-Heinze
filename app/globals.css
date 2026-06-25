@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Farben (exakt aus README §5.1) ---- */
+  --color-navy: #001031;
+  --color-navy-900: #00081f;
+  --color-navy-700: #062046;
+  --color-navy-panel: #0a2a52;
+  --color-prozess: #0b1f3d;
+  --color-blue: #0d76c7;
+  --color-blue-hover: #1685db;
+  --color-blue-hover2: #0961a8;
+  --color-blue-deep: #0a3a6b;
+  --color-ice: #9fc3e9;
+  --color-paper: #eef3f8;
+  --color-surface-2: #f4f7fb;
+  --color-chip: #f1f5fa;
+  --color-ink: #0b1119;
+  --color-ink-2: #1c2935;
+  --color-ink-3: #33414f;
+  --color-muted: #5a6b7d;
+  --color-label: #8593a1;
+
+  /* ---- Fonts (an next/font-Variablen gekoppelt) ---- */
+  --font-display: var(--font-display), "Space Grotesk", sans-serif;
+  --font-sans: var(--font-sans), "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: var(--font-mono), "IBM Plex Mono", monospace;
+
+  /* ---- Animationen ---- */
+  --animate-sweep: hhSweep 7s ease-in-out infinite;
+  --animate-sweep-fast: hhSweep 6.5s ease-in-out infinite;
+  --animate-sweep-slow: hhSweep 8s ease-in-out infinite;
+  --animate-sweep-edge: hhSweep 4.5s ease-in-out infinite;
+  --animate-fade: hhFade 0.35s ease both;
+  --animate-blink: hhBlink 2s ease-in-out infinite;
+  --animate-popin: hhPopIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-squeegee: hhSqueegee 0.85s cubic-bezier(0.7, 0, 0.25, 1) 0.22s forwards;
+}
+
+@keyframes hhSweep {
+  0% { transform: translateX(-130%) skewX(-14deg); }
+  55% { transform: translateX(360%) skewX(-14deg); }
+  100% { transform: translateX(360%) skewX(-14deg); }
+}
+@keyframes hhFade {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hhBlink {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@keyframes hhPopIn {
+  0% { opacity: 0; transform: translateY(26px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes hhSqueegee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(102%); }
+}
+@keyframes hhFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #0d76c7; color: #fff; }
+input, textarea, button { font-family: inherit; }
+
+/* Reduced Motion: Sweeps und Pop-In deaktivieren */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

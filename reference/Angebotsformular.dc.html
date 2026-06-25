@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#d8dee6;font-family:'IBM Plex Sans',sans-serif;color:#1c2935;-webkit-font-smoothing:antialiased}
+  @page{size:A4;margin:0}
+  @media print{body{background:#fff}.sheet{box-shadow:none!important;margin:0!important}}
+</style>
+</helmet>
+
+<div style="padding:30px 0;display:flex;justify-content:center">
+  <div class="sheet" style="width:794px;min-height:1123px;background:#fff;box-shadow:0 14px 44px -18px rgba(0,16,49,.4);position:relative;overflow:hidden;display:flex;flex-direction:column">
+    <img src="assets/mark-h.png" alt="" style="position:absolute;right:-60px;bottom:-50px;height:340px;opacity:.05" />
+
+    <!-- letterhead -->
+    <div style="padding:46px 56px 0;display:flex;justify-content:space-between;align-items:flex-start">
+      <img src="assets/logo.png" alt="Hubert Heinze GmbH" style="height:54px;width:auto" />
+      <div style="text-align:right;font-family:'IBM Plex Mono';font-size:10.5px;line-height:1.7;color:#5a6b7d;letter-spacing:.02em">
+        HUBERT HEINZE GMBH · GLASFACHGROSSHANDEL<br/>RINGSTRASSE 10 · 04654 FROHBURG<br/>+49 34348 556 58 · T.ZEIBIG@GLASHANDEL-HEINZE.DE
+      </div>
+    </div>
+    <div style="margin:22px 56px 0;height:3px;background:#0D76C7"></div>
+
+    <div style="padding:28px 56px 0;flex:1">
+      <!-- title + meta -->
+      <div style="display:flex;justify-content:space-between;align-items:flex-end">
+        <div>
+          <div style="display:flex;align-items:center;gap:9px;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.16em;color:#0D76C7;text-transform:uppercase"><span style="width:7px;height:7px;background:#0D76C7;display:inline-block"></span>Angebot · Beispieldokument</div>
+          <h1 style="font-family:'Space Grotesk';font-weight:600;font-size:30px;letter-spacing:-.02em;color:#001031;margin:12px 0 0">Angebot</h1>
+        </div>
+        <div style="text-align:right;font-family:'IBM Plex Mono';font-size:11.5px;color:#5a6b7d;line-height:1.8">
+          <div>NR. &nbsp;HH-2026-0473</div>
+          <div>DATUM &nbsp;25.06.2026</div>
+          <div>GÜLTIG BIS &nbsp;25.07.2026</div>
+        </div>
+      </div>
+
+      <!-- recipient -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+        <div style="border:1px solid rgba(0,16,49,.12);border-radius:5px;padding:16px 18px">
+          <div style="font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.12em;color:#0D76C7;text-transform:uppercase">Angebot für</div>
+          <div style="font-weight:600;color:#001031;margin-top:7px;font-size:14.5px">Mustermann Bau GmbH</div>
+          <div style="font-size:12.5px;color:#33414f;line-height:1.6;margin-top:3px">z. Hd. Max Mustermann<br/>Musterstraße 12, 04109 Leipzig</div>
+        </div>
+        <div style="border:1px solid rgba(0,16,49,.12);border-radius:5px;padding:16px 18px">
+          <div style="font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.12em;color:#0D76C7;text-transform:uppercase">Projekt</div>
+          <div style="font-weight:600;color:#001031;margin-top:7px;font-size:14.5px">Bürogebäude · Fassade & Trennwände</div>
+          <div style="font-size:12.5px;color:#33414f;line-height:1.6;margin-top:3px">Bauvorhaben Leipzig-Plagwitz<br/>Sachbearbeiter: T. Zeibig</div>
+        </div>
+      </div>
+
+      <p style="font-size:12.8px;line-height:1.7;color:#33414f;margin:22px 0 0">Sehr geehrter Herr Mustermann, vielen Dank für Ihre Anfrage. Gern unterbreiten wir Ihnen folgendes Angebot über die Lieferung und Montage der nachstehend aufgeführten Glaserzeugnisse. Alle Positionen sind Beispielwerte zur Veranschaulichung.</p>
+
+      <!-- line items table -->
+      <div style="margin-top:22px;border:1px solid rgba(0,16,49,.12);border-radius:6px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:42px 1fr 70px 100px 110px;background:#001031;color:#fff;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.06em;text-transform:uppercase">
+          <div style="padding:11px 12px">Pos</div>
+          <div style="padding:11px 12px">Leistung</div>
+          <div style="padding:11px 12px;text-align:right">Menge</div>
+          <div style="padding:11px 12px;text-align:right">Einzel €</div>
+          <div style="padding:11px 14px;text-align:right">Gesamt €</div>
+        </div>
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:42px 1fr 70px 100px 110px;border-top:1px solid rgba(0,16,49,.08);font-size:12.3px;color:#1c2935">
+            <div style="padding:12px;font-family:'IBM Plex Mono';color:#0D76C7">{{ r.pos }}</div>
+            <div style="padding:12px">
+              <div style="font-weight:600;color:#001031">{{ r.title }}</div>
+              <div style="font-size:11.3px;color:#5a6b7d;margin-top:2px">{{ r.desc }}</div>
+            </div>
+            <div style="padding:12px;text-align:right;font-family:'IBM Plex Mono'">{{ r.qty }}</div>
+            <div style="padding:12px;text-align:right;font-family:'IBM Plex Mono'">{{ r.unit }}</div>
+            <div style="padding:12px 14px;text-align:right;font-family:'IBM Plex Mono';color:#001031">{{ r.total }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- totals -->
+      <div style="display:flex;justify-content:flex-end;margin-top:18px">
+        <div style="width:300px;font-size:13px">
+          <div style="display:flex;justify-content:space-between;padding:7px 0;color:#33414f"><span>Zwischensumme</span><span style="font-family:'IBM Plex Mono'">14.820,00 €</span></div>
+          <div style="display:flex;justify-content:space-between;padding:7px 0;color:#33414f;border-bottom:1px solid rgba(0,16,49,.1)"><span>zzgl. 19 % USt.</span><span style="font-family:'IBM Plex Mono'">2.815,80 €</span></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;color:#001031;font-weight:700;font-size:16px"><span style="font-family:'Space Grotesk'">Gesamtbetrag</span><span style="font-family:'IBM Plex Mono'">17.635,80 €</span></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
+        <div style="background:#f4f7fb;border:1px solid rgba(0,16,49,.1);border-radius:6px;padding:14px 16px">
+          <div style="font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.12em;color:#0D76C7;text-transform:uppercase">Konditionen</div>
+          <div style="font-size:11.8px;color:#5a6b7d;line-height:1.6;margin-top:6px">Lieferzeit ca. 4 Wochen nach Freigabe · 40 % bei Auftrag, 60 % nach Abnahme · Preise zzgl. Fracht.</div>
+        </div>
+        <div style="background:#f4f7fb;border:1px solid rgba(0,16,49,.1);border-radius:6px;padding:14px 16px">
+          <div style="font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.12em;color:#0D76C7;text-transform:uppercase">Hinweis</div>
+          <div style="font-size:11.8px;color:#5a6b7d;line-height:1.6;margin-top:6px">Beispieldokument zur Darstellung des Corporate Designs. Alle Daten und Beträge sind frei erfunden.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:22px 56px 30px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono';font-size:10px;color:#8593a1;letter-spacing:.04em;border-top:1px solid rgba(0,16,49,.1)">
+      <span><span style="display:inline-block;width:6px;height:6px;background:#0D76C7;margin-right:7px"></span>HUBERT HEINZE GMBH · RINGSTRASSE 10 · 04654 FROHBURG · GF TILO ZEIBIG</span>
+      <span>SEITE 1 / 1</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:854,&quot;height&quot;:1183}}">
+class Component extends DCLogic {
+  renderVals(){
+    return {
+      rows: [
+        { pos:'01', title:'Sonnenschutz-Isolierglas (2-fach)', desc:'Ug 1,1 W/m²K · g-Wert 0,28 · Maße n. Aufmaß', qty:'24 m²', unit:'185,00', total:'4.440,00' },
+        { pos:'02', title:'VSG 8.8 begehbar, satiniert', desc:'Verbundsicherheitsglas · rutschhemmend R11', qty:'6 m²', unit:'420,00', total:'2.520,00' },
+        { pos:'03', title:'Ganzglas-Trennwandsystem', desc:'10 mm ESG klar · inkl. Profilen & Beschlägen', qty:'18 lfm', unit:'265,00', total:'4.770,00' },
+        { pos:'04', title:'Ganzglastür mit Drehbeschlag', desc:'10 mm ESG · polierte Kanten · Edelstahlgriff', qty:'2 Stk', unit:'690,00', total:'1.380,00' },
+        { pos:'05', title:'Aufmaß, Lieferung & Montage', desc:'Fachmontage inkl. Anfahrt Region Leipzig', qty:'1 psch', unit:'1.710,00', total:'1.710,00' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

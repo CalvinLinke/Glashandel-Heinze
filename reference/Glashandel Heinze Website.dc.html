@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#EEF3F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0B1119;-webkit-font-smoothing:antialiased}
+  ::selection{background:#0D76C7;color:#fff}
+  input,textarea,button{font-family:inherit}
+  @keyframes hhSweep{0%{transform:translateX(-130%) skewX(-14deg)}55%{transform:translateX(360%) skewX(-14deg)}100%{transform:translateX(360%) skewX(-14deg)}}
+  @keyframes hhWipe{0%{-webkit-mask-position:135% 0;mask-position:135% 0}100%{-webkit-mask-position:-135% 0;mask-position:-135% 0}}
+  @keyframes hhFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes hhRefract{0%{transform:translateX(-60%)}100%{transform:translateX(160%)}}
+  @keyframes hhFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes hhBlink{0%,100%{opacity:.35}50%{opacity:1}}
+  @keyframes hhPopIn{0%{opacity:0;transform:translateY(26px) scale(.97)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes hhSqueegee{0%{transform:translateX(0)}100%{transform:translateX(102%)}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#EEF3F8">
+
+  <!-- ============ NAV ============ -->
+  <header style="position:sticky;top:0;z-index:60;background:rgba(238,243,248,.72);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);border-bottom:1px solid rgba(0,16,49,.09)">
+    <div style="max-width:1280px;margin:0 auto;padding:0 28px;height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <button onClick="{{ goHome }}" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center">
+        <img src="assets/logo.png" alt="Hubert Heinze GmbH — Glasfachgroßhandel" style="height:56px;width:auto;display:block" />
+      </button>
+      <nav style="display:flex;align-items:center;gap:4px">
+        <button onClick="{{ goHome }}" style="{{ navHomeStyle }}">Start</button>
+        <button onClick="{{ goUeber }}" style="{{ navUeberStyle }}">Über uns</button>
+        <button onClick="{{ goLeistungen }}" style="{{ navLeistungenStyle }}">Leistungen</button>
+        <button onClick="{{ goReferenzen }}" style="{{ navReferenzenStyle }}">Referenzen</button>
+        <button onClick="{{ goKontakt }}" style="{{ navKontaktStyle }}">Kontakt</button>
+      </nav>
+      <button onClick="{{ goAngebot }}" style="display:flex;align-items:center;gap:9px;background:#0D76C7;color:#fff;border:none;cursor:pointer;font-weight:600;font-size:14.5px;padding:12px 20px;border-radius:3px;box-shadow:0 10px 24px -12px rgba(13,118,199,.8)" style-hover="background:#0961a8">
+        <span style="width:7px;height:7px;background:#9FC3E9;display:inline-block"></span>Angebot anfragen
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <main>
+
+    <!-- HERO -->
+    <section style="position:relative;background:#001031;color:#fff;overflow:hidden;border-bottom:1px solid rgba(159,195,233,.18)">
+
+      <!-- ===== Variant: Lichtwanderung (zwei Scheiben) ===== -->
+      <sc-if value="{{ heroLicht }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;inset:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#062046 0%,#001031 55%,#00081f 100%)"></div>
+        <div style="position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(90deg,rgba(159,195,233,.10) 0 1px,transparent 1px 78px),repeating-linear-gradient(0deg,rgba(159,195,233,.07) 0 1px,transparent 1px 78px)"></div>
+        <div style="position:absolute;right:-6%;top:-12%;width:60%;height:128%;transform:skewX(-9deg);background:linear-gradient(180deg,rgba(13,118,199,.28),rgba(159,195,233,.05));border-left:1px solid rgba(159,195,233,.3);overflow:hidden">
+          <div style="position:absolute;top:0;left:0;width:34%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);filter:blur(6px);animation:hhSweep 7s ease-in-out infinite"></div>
+        </div>
+        <div style="position:absolute;right:18%;top:8%;width:30%;height:120%;transform:skewX(-9deg);background:rgba(159,195,233,.06);border-left:1px solid rgba(159,195,233,.18)"></div>
+      </div>
+      </sc-if>
+
+      <!-- ===== Variant: H-Icon (Glaskörper, Licht wandert hindurch) ===== -->
+      <sc-if value="{{ heroH }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;inset:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#062046 0%,#001031 55%,#00081f 100%)"></div>
+        <div style="position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(90deg,rgba(159,195,233,.10) 0 1px,transparent 1px 78px),repeating-linear-gradient(0deg,rgba(159,195,233,.07) 0 1px,transparent 1px 78px)"></div>
+        <div style="position:absolute;right:2%;top:-12%;width:42%;height:128%;transform:skewX(-9deg);background:linear-gradient(180deg,rgba(13,118,199,.12),transparent 70%);border-left:1px solid rgba(159,195,233,.14)"></div>
+        <div style="position:absolute;right:7%;top:50%;transform:translateY(-50%);height:94%;aspect-ratio:380/764;pointer-events:none">
+          <div style="position:absolute;inset:-8% -14%;background:radial-gradient(58% 56% at 50% 42%,rgba(13,118,199,.42),transparent 72%);filter:blur(24px)"></div>
+          <div style="position:absolute;inset:0;-webkit-mask:url(assets/mark-h-white.png) center/contain no-repeat;mask:url(assets/mark-h-white.png) center/contain no-repeat;background:linear-gradient(152deg,rgba(64,150,224,.92),rgba(159,195,233,.55) 55%,rgba(13,118,199,.7))"></div>
+          <div style="position:absolute;inset:0;-webkit-mask:url(assets/mark-h-white.png) center/contain no-repeat;mask:url(assets/mark-h-white.png) center/contain no-repeat;background:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 1px,transparent 1px 24px)"></div>
+          <div style="position:absolute;inset:0;overflow:hidden;-webkit-mask:url(assets/mark-h-white.png) center/contain no-repeat;mask:url(assets/mark-h-white.png) center/contain no-repeat">
+            <div style="position:absolute;top:-12%;left:0;width:46%;height:124%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);filter:blur(6px);animation:hhSweep 6.5s ease-in-out infinite"></div>
+          </div>
+          <img src="assets/mark-h-white.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.32" />
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- Hero content -->
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:118px 28px 128px;min-height:600px;display:flex;flex-direction:column;justify-content:center">
+        <div style="display:flex;align-items:center;gap:11px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.2em;color:#9FC3E9;text-transform:uppercase">
+          <span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>{{ heroKicker }}
+        </div>
+        <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:74px;line-height:1.02;letter-spacing:-.02em;margin:24px 0 0;max-width:14ch;text-wrap:balance">{{ heroHeadline }}</h1>
+        <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,.74);max-width:52ch;margin:26px 0 0">{{ heroSub }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:38px">
+          <button onClick="{{ goAngebot }}" style="display:flex;align-items:center;gap:10px;background:#0D76C7;color:#fff;border:none;cursor:pointer;font-weight:600;font-size:16px;padding:16px 28px;border-radius:3px;box-shadow:0 16px 40px -16px rgba(13,118,199,.9)" style-hover="background:#1685db">Angebot anfragen<span style="font-family:'IBM Plex Mono'">→</span></button>
+          <button onClick="{{ goLeistungen }}" style="background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(159,195,233,.4);cursor:pointer;font-weight:500;font-size:16px;padding:16px 28px;border-radius:3px;backdrop-filter:blur(8px)" style-hover="background:rgba(255,255,255,.14)">Leistungen entdecken</button>
+        </div>
+        <!-- spec ticker -->
+        <div style="display:flex;flex-wrap:wrap;gap:26px;margin-top:54px;padding-top:26px;border-top:1px solid rgba(159,195,233,.18);font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:.04em;color:rgba(159,195,233,.85)">
+          <span>SCHNELL GELIEFERT · GEPRÜFTE QUALITÄT · PERSÖNLICH BERATEN</span>
+          <span style="color:rgba(255,255,255,.4)">|</span>
+          <span>FROHBURG · SACHSEN</span>
+        </div>
+      </div>
+
+      <!-- Hero concept switcher -->
+      <div style="position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:8px;background:rgba(0,8,31,.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(159,195,233,.28);border-radius:100px;padding:7px 9px 7px 16px">
+        <span style="font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.16em;color:#9FC3E9;text-transform:uppercase">Hero-Konzept</span>
+        <button onClick="{{ setHeroLicht }}" style="{{ swLicht }}">Lichtwanderung</button>
+        <button onClick="{{ setHeroH }}" style="{{ swH }}">H-Icon</button>
+      </div>
+    </section>
+
+    <!-- INTRO BAND -->
+    <section style="max-width:1280px;margin:0 auto;padding:96px 28px 40px">
+      <div style="display:grid;grid-template-columns:1fr 1.25fr;gap:64px;align-items:start">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.18em;color:#0D76C7;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Glas am Bau & in der Industrie</div>
+          <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:40px;line-height:1.08;letter-spacing:-.02em;margin:18px 0 0;color:#001031">Das passende Glas für jedes Projekt — außen wie innen.</h2>
+        </div>
+        <div style="padding-top:6px">
+          <p style="font-size:18px;line-height:1.7;color:#33414f;margin:0">Wir liefern für jedes Bauvorhaben die richtige Lösung. Je nach Standort des Gebäudes kombinieren wir Wärme- und Sonnenschutzgläser — unsere beschichteten Gläser erfüllen alle Normen ohne Abstriche beim Design.</p>
+          <p style="font-size:18px;line-height:1.7;color:#33414f;margin:18px 0 0">Innenräume lassen sich mit Glas spannend gestalten: von der Wandverkleidung über exklusive Dekorgläser bis zu Glastüren, Glasduschen und begehbaren Glastreppen. Als Glasfachgroßhandel sind wir Partner für Architekten, Verarbeiter und Industrie.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEISTUNGEN PREVIEW -->
+    <section style="max-width:1280px;margin:0 auto;padding:56px 28px 40px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:30px">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.18em;color:#0D76C7;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Fünf Glasbereiche</div>
+          <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:34px;letter-spacing:-.02em;margin:14px 0 0;color:#001031">Unser Leistungsspektrum</h2>
+        </div>
+        <button onClick="{{ goLeistungen }}" style="background:none;border:1px solid rgba(0,16,49,.18);color:#001031;cursor:pointer;font-weight:500;font-size:14.5px;padding:11px 18px;border-radius:3px" style-hover="border-color:#0D76C7;color:#0D76C7">Alle Leistungen →</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
+        <sc-for list="{{ leistungen }}" as="l" hint-placeholder-count="5">
+          <button onClick="{{ l.go }}" style="position:relative;text-align:left;cursor:pointer;background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:5px;padding:0;overflow:hidden;box-shadow:0 18px 40px -30px rgba(0,16,49,.5)" style-hover="border-color:#0D76C7">
+            <div style="position:relative;height:122px;background:linear-gradient(140deg,#0a2a52,#001031);overflow:hidden">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(159,195,233,.12) 0 1px,transparent 1px 30px)"></div>
+              <div style="position:absolute;left:-30%;top:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:skewX(-16deg)"></div>
+              <span style="position:absolute;left:14px;top:12px;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.1em;color:#9FC3E9">{{ l.no }}</span>
+              <span style="position:absolute;left:14px;bottom:12px;font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.65);background:rgba(255,255,255,.1);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);padding:4px 8px">{{ l.label }}</span>
+            </div>
+            <div style="padding:16px 16px 20px">
+              <div style="font-family:'Space Grotesk';font-weight:600;font-size:19px;color:#001031">{{ l.name }}</div>
+              <div style="font-size:13px;line-height:1.5;color:#5a6b7d;margin-top:6px">{{ l.tagline }}</div>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <section style="background:#001031;color:#fff;margin-top:60px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.4;background:repeating-linear-gradient(90deg,rgba(159,195,233,.1) 0 1px,transparent 1px 90px)"></div>
+      <img src="assets/mark-h-white.png" alt="" style="position:absolute;right:3%;top:50%;transform:translateY(-50%);height:240px;opacity:.07" />
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:64px 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:34px" data-hhstats="1">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div>
+            <div style="font-family:'Space Grotesk';font-weight:600;font-size:54px;letter-spacing:-.03em;color:#fff;line-height:1">{{ s.v }}</div>
+            <div style="font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:.05em;color:#9FC3E9;margin-top:10px;text-transform:uppercase">{{ s.l }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- DIE DREI E -->
+    <section style="max-width:1280px;margin:0 auto;padding:96px 28px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.18em;color:#0D76C7;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Die drei „e"</div>
+      <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:38px;letter-spacing:-.02em;margin:14px 0 44px;color:#001031;max-width:20ch">Was uns von anderen unterscheidet</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+        <sc-for list="{{ dreiE }}" as="d" hint-placeholder-count="3">
+          <div style="position:relative;background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:6px;padding:34px 30px 36px;overflow:hidden;box-shadow:0 24px 50px -36px rgba(0,16,49,.5);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,border-color .28s ease;cursor:default" style-hover="transform:translateY(-8px);border-color:rgba(13,118,199,.55);box-shadow:0 34px 66px -30px rgba(13,118,199,.5)">
+            <div style="position:absolute;right:-10px;top:-22px;font-family:'Space Grotesk';font-weight:700;font-size:120px;color:rgba(13,118,199,.07);line-height:1">{{ d.big }}</div>
+            <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.1em;color:#0D76C7">{{ d.no }}</div>
+            <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:26px;margin:14px 0 0;color:#001031">{{ d.e }}</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#5a6b7d;margin:14px 0 0">{{ d.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- PROZESS -->
+    <section style="background:#0b1f3d;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.4;background:repeating-linear-gradient(0deg,rgba(159,195,233,.08) 0 1px,transparent 1px 70px)"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:90px 28px">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.18em;color:#9FC3E9;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>So arbeiten wir</div>
+        <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:38px;letter-spacing:-.02em;margin:14px 0 46px;max-width:22ch">Von der Anfrage bis zur Montage — ein klarer Weg</h2>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0">
+          <sc-for list="{{ prozess }}" as="p" hint-placeholder-count="4">
+            <div style="padding:0 26px 0 0;border-left:1px solid rgba(159,195,233,.22);padding-left:22px">
+              <div style="font-family:'IBM Plex Mono';font-size:13px;color:#0D76C7;letter-spacing:.08em">{{ p.no }}</div>
+              <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:21px;margin:16px 0 0">{{ p.t }}</h3>
+              <p style="font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.66);margin:12px 0 0">{{ p.d }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section style="max-width:1280px;margin:0 auto;padding:90px 28px">
+      <div style="position:relative;overflow:hidden;border-radius:10px;background:linear-gradient(120deg,#0D76C7,#0a3a6b);box-shadow:0 40px 80px -50px rgba(13,118,199,.9)">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 64px)"></div>
+        <div style="position:absolute;inset:0;overflow:hidden;opacity:.55;pointer-events:none"><div style="position:absolute;top:0;left:0;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-16deg);animation:hhSweep 8s ease-in-out infinite"></div></div>
+        <div style="position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:0">
+          <!-- left: pitch -->
+          <div style="padding:58px 50px 58px 56px">
+            <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:100px;padding:7px 15px;font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:.12em;color:#fff;text-transform:uppercase"><span style="width:7px;height:7px;background:#9FC3E9;display:inline-block;animation:hhBlink 2s ease-in-out infinite"></span>Kostenlos & unverbindlich</div>
+            <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:42px;letter-spacing:-.02em;color:#fff;margin:18px 0 0;line-height:1.06;max-width:16ch">In 2 Minuten zum Glas-Angebot.</h2>
+            <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,.88);margin:16px 0 0;max-width:42ch">Maße rein, Glasart wählen, abschicken — den Rest übernehmen wir. Persönliche Fachberatung statt Wartemusik.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px 22px;margin:26px 0 30px;max-width:46ch">
+              <sc-for list="{{ ctaBenefits }}" as="b" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:10px;font-size:14.5px;color:#fff;font-weight:500"><span style="flex:none;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);display:inline-flex;align-items:center;justify-content:center;font-size:11px">✓</span>{{ b }}</div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+              <button onClick="{{ goAngebot }}" style="background:#fff;color:#0D76C7;border:none;cursor:pointer;font-weight:700;font-size:16px;padding:17px 30px;border-radius:3px;box-shadow:0 16px 34px -16px rgba(0,8,31,.6)" style-hover="background:#eaf2fb">Angebot anfordern →</button>
+              <a href="tel:+493434855658" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:600;font-size:16px;border:1px solid rgba(255,255,255,.45);padding:16px 24px;border-radius:3px" style-hover="background:rgba(255,255,255,.12)"><span style="font-family:'IBM Plex Mono'">☎</span>+49 34348 556 58</a>
+            </div>
+          </div>
+          <!-- right: trust panel -->
+          <div style="position:relative;padding:44px 48px;background:rgba(0,8,31,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-left:1px solid rgba(255,255,255,.16)">
+            <img src="assets/mark-h-white.png" alt="" style="position:absolute;right:24px;bottom:-26px;height:200px;opacity:.12" />
+            <div style="position:relative">
+              <div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.14em;color:#9FC3E9;text-transform:uppercase">So einfach geht's</div>
+              <div style="margin-top:20px;display:flex;flex-direction:column;gap:2px">
+                <sc-for list="{{ ctaSteps }}" as="s" hint-placeholder-count="3">
+                  <div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12)">
+                    <span style="flex:none;font-family:'Space Grotesk';font-weight:700;font-size:22px;color:#9FC3E9;width:34px">{{ s.no }}</span>
+                    <div><div style="color:#fff;font-weight:600;font-size:15.5px">{{ s.t }}</div><div style="color:rgba(255,255,255,.66);font-size:13px;margin-top:2px">{{ s.d }}</div></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;gap:26px;margin-top:22px">
+                <div><div style="font-family:'Space Grotesk';font-weight:600;font-size:30px;color:#fff;line-height:1">24 h</div><div style="font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.06em;color:#9FC3E9;margin-top:5px;text-transform:uppercase">bis zur Antwort</div></div>
+                <div><div style="font-family:'Space Grotesk';font-weight:600;font-size:30px;color:#fff;line-height:1">30+</div><div style="font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.06em;color:#9FC3E9;margin-top:5px;text-transform:uppercase">Jahre Erfahrung</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== SCROLL-POP-UP: Glas-Wisch Aktion ===== -->
+    <sc-if value="{{ promoVisible }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;right:24px;bottom:24px;z-index:200;width:354px;animation:hhPopIn .5s cubic-bezier(.2,.8,.2,1) both">
+      <div style="position:relative;overflow:hidden;border-radius:10px;background:linear-gradient(150deg,#06224a,#001031);box-shadow:0 30px 70px -22px rgba(0,8,31,.7);border:1px solid rgba(159,195,233,.22)">
+        <!-- top light edge -->
+        <div style="position:absolute;left:0;right:0;top:0;height:2px;overflow:hidden"><div style="position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(159,195,233,.95),transparent);animation:hhSweep 4.5s ease-in-out infinite"></div></div>
+        <!-- glass H motif -->
+        <div style="position:absolute;right:-16px;bottom:-22px;height:150px;aspect-ratio:380/764;pointer-events:none">
+          <div style="position:absolute;inset:0;-webkit-mask:url(assets/mark-h-white.png) center/contain no-repeat;mask:url(assets/mark-h-white.png) center/contain no-repeat;background:linear-gradient(150deg,rgba(64,150,224,.5),rgba(159,195,233,.18))"></div>
+          <img src="assets/mark-h-white.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.18" />
+        </div>
+        <!-- content -->
+        <div style="position:relative;padding:24px 24px 26px">
+          <button onClick="{{ closePromo }}" aria-label="Schließen" style="position:absolute;top:13px;right:13px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(159,195,233,.25);color:#cfe0f2;cursor:pointer;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(255,255,255,.2)">×</button>
+          <div style="display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.16em;color:#9FC3E9;text-transform:uppercase"><span style="width:7px;height:7px;background:#0D76C7;display:inline-block;animation:hhBlink 2s ease-in-out infinite"></span>Aktion</div>
+          <div style="font-family:'Space Grotesk';font-weight:600;font-size:24px;color:#fff;letter-spacing:-.01em;margin-top:12px;line-height:1.12">Kostenloses Aufmaß</div>
+          <p style="font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.74);margin:8px 0 0;max-width:30ch">Sichern Sie sich Ihren Vor-Ort-Termin — unverbindlich und gratis. Nur noch <b style="color:#9FC3E9">bis 31.07.</b></p>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:18px">
+            <button onClick="{{ promoCta }}" style="background:#0D76C7;color:#fff;border:none;cursor:pointer;font-weight:600;font-size:14px;padding:12px 18px;border-radius:3px" style-hover="background:#1685db">Termin anfragen →</button>
+            <a href="tel:+493434855658" style="font-family:'IBM Plex Mono';font-size:12.5px;color:#9FC3E9;text-decoration:none">☎ 034348 556 58</a>
+          </div>
+        </div>
+        <!-- one-shot squeegee wipe revealing the card -->
+        <div style="position:absolute;inset:0;background:rgba(196,214,238,.9);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);animation:hhSqueegee .85s cubic-bezier(.7,0,.25,1) .22s forwards">
+          <div style="position:absolute;right:0;top:0;bottom:0;width:7px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95));box-shadow:0 0 16px 2px rgba(255,255,255,.6)"></div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+  </main>
+  </sc-if>
+  <sc-if value="{{ isUeber }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <section style="background:#001031;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.4;background:repeating-linear-gradient(90deg,rgba(159,195,233,.1) 0 1px,transparent 1px 84px)"></div>
+      <img src="assets/mark-h-white.png" alt="" style="position:absolute;right:6%;top:50%;transform:translateY(-50%);height:280px;opacity:.08" />
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 28px 86px">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:.2em;color:#9FC3E9;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Über uns</div>
+        <h1 style="font-family:'Space Grotesk';font-weight:600;font-size:58px;line-height:1.04;letter-spacing:-.02em;margin:22px 0 0;max-width:18ch">Glasfachgroßhandel mit Knowhow aus drei Jahrzehnten.</h1>
+        <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,.74);max-width:56ch;margin:24px 0 0">Die Hubert Heinze GmbH ist Partner für Architekten, Bauunternehmen, Glasverarbeiter und Industrie. Von unserem Standort in Frohburg liefern wir Glas in nahezu jeder Ausführung — beraten, geplant und veredelt.</p>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:90px 28px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:6px;background:linear-gradient(140deg,#0a2a52,#001031)">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(159,195,233,.12) 0 1px,transparent 1px 56px),repeating-linear-gradient(0deg,rgba(159,195,233,.09) 0 1px,transparent 1px 56px)"></div>
+          <div style="position:absolute;left:12px;bottom:12px;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,.85);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);padding:6px 10px">[ PLATZHALTER · LAGER & ZUSCHNITT FROHBURG ]</div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.18em;color:#0D76C7;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Unser Anspruch</div>
+          <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:34px;letter-spacing:-.02em;margin:14px 0 0;color:#001031;line-height:1.12">Wir denken Glas vom Bauteil bis zum fertigen Raum.</h2>
+          <p style="font-size:17px;line-height:1.7;color:#33414f;margin:20px 0 0">Ob Basisglas für die Weiterverarbeitung, beschichtetes Fassadenglas oder komplette Ganzglasanlagen — wir kombinieren ein breites Lieferprogramm mit fundierter Fachberatung. So finden wir auf dem schnellsten Weg die passende Lösung für Ihr Bauvorhaben.</p>
+          <p style="font-size:17px;line-height:1.7;color:#33414f;margin:16px 0 0">Dabei analysieren wir unsere Abläufe ständig und strukturieren Veränderungen gezielt — damit Qualität und Liefertreue auch bei wachsenden Anforderungen stimmen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:10px 28px 30px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+        <sc-for list="{{ dreiE }}" as="d" hint-placeholder-count="3">
+          <div style="position:relative;background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:6px;padding:30px;overflow:hidden;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,border-color .28s ease;cursor:default" style-hover="transform:translateY(-8px);border-color:rgba(13,118,199,.55);box-shadow:0 30px 58px -30px rgba(13,118,199,.45)">
+            <div style="position:absolute;right:-8px;top:-20px;font-family:'Space Grotesk';font-weight:700;font-size:110px;color:rgba(13,118,199,.07)">{{ d.big }}</div>
+            <div style="font-family:'IBM Plex Mono';font-size:12px;color:#0D76C7">{{ d.no }}</div>
+            <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:24px;margin:12px 0 0;color:#001031">{{ d.e }}</h3>
+            <p style="font-size:15px;line-height:1.6;color:#5a6b7d;margin:12px 0 0">{{ d.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:60px 28px 96px">
+      <div style="background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:8px;padding:42px 44px;display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center;box-shadow:0 24px 50px -38px rgba(0,16,49,.5)">
+        <div style="width:118px;height:118px;border-radius:6px;background:linear-gradient(140deg,#0a2a52,#001031);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center">
+          <span style="font-family:'Space Grotesk';font-weight:700;font-size:40px;color:#9FC3E9">TZ</span>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.14em;color:#0D76C7;text-transform:uppercase">Geschäftsführung</div>
+          <div style="font-family:'Space Grotesk';font-weight:600;font-size:28px;color:#001031;margin-top:8px">Tilo Zeibig</div>
+          <p style="font-size:15.5px;line-height:1.6;color:#5a6b7d;margin:10px 0 0;max-width:60ch">„Gutes Glas beginnt mit guter Beratung. Wir nehmen uns Zeit für Ihr Projekt und liefern eine Lösung, die technisch wie gestalterisch überzeugt."</p>
+        </div>
+        <button onClick="{{ goKontakt }}" style="white-space:nowrap;background:#0D76C7;color:#fff;border:none;cursor:pointer;font-weight:600;font-size:15px;padding:14px 22px;border-radius:3px" style-hover="background:#0961a8">Kontakt aufnehmen →</button>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ============ LEISTUNGEN ============ -->
+  <sc-if value="{{ isLeistungen }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <section style="background:#001031;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.4;background:repeating-linear-gradient(90deg,rgba(159,195,233,.1) 0 1px,transparent 1px 84px)"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:90px 28px 70px">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:.2em;color:#9FC3E9;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Leistungen · Fünf Glasbereiche</div>
+        <h1 style="font-family:'Space Grotesk';font-weight:600;font-size:56px;line-height:1.04;letter-spacing:-.02em;margin:22px 0 0;max-width:16ch">Das passende Glas für Ihr Projekt.</h1>
+        <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.72);max-width:54ch;margin:22px 0 0">Von der einzelnen Scheibe bis zum kompletten Glassystem — gegliedert in fünf Bereiche, jeder mit eigenem Lieferprogramm und Veredelungsoptionen.</p>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:30px 28px 90px">
+      <sc-for list="{{ leistungen }}" as="l" hint-placeholder-count="5">
+        <div style="display:grid;grid-template-columns:340px 1fr;gap:48px;padding:54px 0;border-bottom:1px solid rgba(0,16,49,.1)">
+          <div>
+            <div style="position:relative;aspect-ratio:5/4;border-radius:6px;overflow:hidden;background:linear-gradient(140deg,#0a2a52,#001031)">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(159,195,233,.13) 0 1px,transparent 1px 40px),repeating-linear-gradient(0deg,rgba(159,195,233,.09) 0 1px,transparent 1px 40px)"></div>
+              <div style="position:absolute;left:-30%;top:0;width:42%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:skewX(-16deg)"></div>
+              <span style="position:absolute;left:16px;top:14px;font-family:'Space Grotesk';font-weight:700;font-size:34px;color:rgba(159,195,233,.5)">{{ l.no }}</span>
+              <span style="position:absolute;left:16px;bottom:14px;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.16em;color:rgba(255,255,255,.8);background:rgba(255,255,255,.1);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);padding:5px 9px">{{ l.label }}</span>
+            </div>
+          </div>
+          <div>
+            <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:32px;letter-spacing:-.02em;color:#001031;margin:0">{{ l.name }}</h2>
+            <p style="font-size:16.5px;line-height:1.6;color:#5a6b7d;margin:10px 0 0;max-width:60ch">{{ l.desc }}</p>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px 26px;margin-top:24px">
+              <sc-for list="{{ l.items }}" as="it" hint-placeholder-count="6">
+                <div style="display:flex;align-items:center;gap:11px;padding:10px 0;border-top:1px solid rgba(0,16,49,.08);font-size:15.5px;color:#1c2935">
+                  <span style="width:6px;height:6px;background:#0D76C7;display:inline-block;flex:none"></span>{{ it }}
+                </div>
+              </sc-for>
+            </div>
+            <button onClick="{{ goAngebot }}" style="margin-top:24px;background:none;border:1px solid rgba(0,16,49,.18);color:#001031;cursor:pointer;font-weight:500;font-size:14.5px;padding:11px 18px;border-radius:3px" style-hover="border-color:#0D76C7;color:#0D76C7">{{ l.name }} anfragen →</button>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ============ REFERENZEN ============ -->
+  <sc-if value="{{ isReferenzen }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <section style="background:#001031;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.4;background:repeating-linear-gradient(90deg,rgba(159,195,233,.1) 0 1px,transparent 1px 84px)"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:90px 28px 70px">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:.2em;color:#9FC3E9;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Referenzen</div>
+        <h1 style="font-family:'Space Grotesk';font-weight:600;font-size:56px;line-height:1.04;letter-spacing:-.02em;margin:22px 0 0;max-width:18ch">Projekte, die für sich sprechen.</h1>
+        <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.72);max-width:54ch;margin:22px 0 0">Ein Auszug aus realisierten Verglasungen — von der Industriefassade bis zur privaten Ganzglasdusche. Beispielprojekte zur Veranschaulichung.</p>
+      </div>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:60px 28px 96px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+        <sc-for list="{{ referenzen }}" as="r" hint-placeholder-count="6">
+          <div style="background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:6px;overflow:hidden;box-shadow:0 20px 44px -34px rgba(0,16,49,.5)">
+            <div style="position:relative;aspect-ratio:3/2;background:linear-gradient(140deg,#0a2a52,#001031);overflow:hidden">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(159,195,233,.12) 0 1px,transparent 1px 44px),repeating-linear-gradient(0deg,rgba(159,195,233,.08) 0 1px,transparent 1px 44px)"></div>
+              <div style="position:absolute;left:-30%;top:0;width:42%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-16deg)"></div>
+              <span style="position:absolute;left:13px;top:12px;font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.85);background:rgba(13,118,199,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);padding:4px 9px">{{ r.tag }}</span>
+            </div>
+            <div style="padding:20px 22px 24px">
+              <div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.1em;color:#0D76C7;text-transform:uppercase">{{ r.cat }}</div>
+              <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:20px;color:#001031;margin:8px 0 0">{{ r.t }}</h3>
+              <p style="font-size:14.5px;line-height:1.6;color:#5a6b7d;margin:8px 0 0">{{ r.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ============ KONTAKT + KONFIGURATOR ============ -->
+  <sc-if value="{{ isKontakt }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <section style="background:#001031;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.4;background:repeating-linear-gradient(90deg,rgba(159,195,233,.1) 0 1px,transparent 1px 84px)"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:84px 28px 66px">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:.2em;color:#9FC3E9;text-transform:uppercase"><span style="width:8px;height:8px;background:#0D76C7;display:inline-block"></span>Kontakt & Angebot</div>
+        <h1 style="font-family:'Space Grotesk';font-weight:600;font-size:54px;line-height:1.04;letter-spacing:-.02em;margin:20px 0 0;max-width:18ch">Ihr Projekt — in wenigen Schritten zum Angebot.</h1>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:64px 28px 40px;display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start">
+      <!-- contact rail -->
+      <div>
+        <div style="background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:8px;padding:30px;box-shadow:0 24px 50px -40px rgba(0,16,49,.5)">
+          <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.14em;color:#0D76C7;text-transform:uppercase">Direkter Draht</div>
+          <div style="margin-top:20px;display:flex;flex-direction:column;gap:18px">
+            <div>
+              <div style="font-size:12px;color:#8593a1;font-family:'IBM Plex Mono';letter-spacing:.06em">TELEFON</div>
+              <a href="tel:+493434855658" style="font-size:18px;color:#001031;text-decoration:none;font-weight:600;font-family:'Space Grotesk'">+49 34348 556 58</a>
+            </div>
+            <div>
+              <div style="font-size:12px;color:#8593a1;font-family:'IBM Plex Mono';letter-spacing:.06em">E-MAIL</div>
+              <a href="mailto:t.zeibig@glashandel-heinze.de" style="font-size:16px;color:#0D76C7;text-decoration:none;font-weight:500">t.zeibig@glashandel-heinze.de</a>
+            </div>
+            <div>
+              <div style="font-size:12px;color:#8593a1;font-family:'IBM Plex Mono';letter-spacing:.06em">ANSCHRIFT</div>
+              <div style="font-size:16px;color:#1c2935;line-height:1.5">Hubert Heinze GmbH<br/>Ringstraße 10<br/>04654 Frohburg</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:#8593a1;font-family:'IBM Plex Mono';letter-spacing:.06em">ÖFFNUNGSZEITEN</div>
+              <div style="font-size:15px;color:#1c2935;line-height:1.5">Mo–Do 7:00–16:30 Uhr<br/>Fr 7:00–13:00 Uhr</div>
+            </div>
+          </div>
+        </div>
+        <div style="position:relative;margin-top:18px;height:170px;border-radius:8px;overflow:hidden;background:linear-gradient(140deg,#0a2a52,#001031)">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(159,195,233,.13) 0 1px,transparent 1px 34px),repeating-linear-gradient(0deg,rgba(159,195,233,.1) 0 1px,transparent 1px 34px)"></div>
+          <span style="position:absolute;left:12px;bottom:12px;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.1em;color:rgba(255,255,255,.85);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);padding:5px 9px">[ KARTE · FROHBURG, SACHSEN ]</span>
+        </div>
+      </div>
+
+      <!-- configurator -->
+      <div style="background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:8px;overflow:hidden;box-shadow:0 30px 60px -44px rgba(0,16,49,.55)">
+        <!-- progress -->
+        <div style="padding:26px 34px 0">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.14em;color:#0D76C7;text-transform:uppercase">Angebots-Konfigurator</div>
+            <div style="font-family:'IBM Plex Mono';font-size:12px;color:#8593a1">{{ stepLabel }}</div>
+          </div>
+          <div style="margin-top:14px;height:4px;background:#e4ebf2;border-radius:4px;overflow:hidden">
+            <div style="height:100%;background:#0D76C7;border-radius:4px;width:{{ progress }};transition:width .4s ease"></div>
+          </div>
+        </div>
+
+        <div style="padding:30px 34px 36px">
+          <!-- STEP 1 -->
+          <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+          <div style="animation:hhFade .35s ease both">
+            <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:24px;color:#001031;margin:0 0 6px">1 · Welche Glasart benötigen Sie?</h2>
+            <p style="font-size:15px;color:#5a6b7d;margin:0 0 22px">Wählen Sie den passenden Bereich — Details folgen im nächsten Schritt.</p>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+              <sc-for list="{{ glasartOptions }}" as="g" hint-placeholder-count="5">
+                <button onClick="{{ g.select }}" style="{{ g.cardStyle }}">
+                  <div style="display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-family:'Space Grotesk';font-weight:600;font-size:18px;color:#001031">{{ g.name }}</span>
+                    <span style="{{ g.dotStyle }}"></span>
+                  </div>
+                  <div style="font-size:13.5px;color:#5a6b7d;margin-top:6px;text-align:left">{{ g.desc }}</div>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- STEP 2 -->
+          <sc-if value="{{ step2 }}" hint-placeholder-val="{{ true }}">
+          <div style="animation:hhFade .35s ease both">
+            <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:24px;color:#001031;margin:0 0 6px">2 · Maße & Ausführung</h2>
+            <p style="font-size:15px;color:#5a6b7d;margin:0 0 22px">Gewählt: <strong style="color:#0D76C7">{{ form.glasart }}</strong> — beschreiben Sie die gewünschte Ausführung.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <label style="display:block">
+                <span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Breite (mm)</span>
+                <input value="{{ form.breite }}" onInput="{{ onBreite }}" placeholder="z. B. 1200" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;color:#001031;outline:none" />
+              </label>
+              <label style="display:block">
+                <span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Höhe (mm)</span>
+                <input value="{{ form.hoehe }}" onInput="{{ onHoehe }}" placeholder="z. B. 2400" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;color:#001031;outline:none" />
+              </label>
+            </div>
+            <div style="margin-top:18px">
+              <span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Glasstärke</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+                <sc-for list="{{ staerkeOptions }}" as="s" hint-placeholder-count="5">
+                  <button onClick="{{ s.select }}" style="{{ s.chipStyle }}">{{ s.name }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="margin-top:18px">
+              <span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Bearbeitung / Veredelung</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+                <sc-for list="{{ bearbeitungOptions }}" as="b" hint-placeholder-count="5">
+                  <button onClick="{{ b.toggle }}" style="{{ b.chipStyle }}">{{ b.name }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-top:18px">
+              <label style="display:block">
+                <span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Stückzahl</span>
+                <input value="{{ form.menge }}" onInput="{{ onMenge }}" placeholder="1" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;color:#001031;outline:none" />
+              </label>
+              <label style="display:block">
+                <span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Anwendung / Einbauort</span>
+                <input value="{{ form.anwendung }}" onInput="{{ onAnwendung }}" placeholder="z. B. Duschtrennwand, Fassade …" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;color:#001031;outline:none" />
+              </label>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- STEP 3 -->
+          <sc-if value="{{ step3 }}" hint-placeholder-val="{{ true }}">
+          <div style="animation:hhFade .35s ease both">
+            <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:24px;color:#001031;margin:0 0 6px">3 · Ihre Kontaktdaten</h2>
+              <p style="font-size:15px;color:#5a6b7d;margin:0 0 22px">Wohin dürfen wir Ihr individuelles Angebot senden?</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                <label style="display:block"><span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Name</span><input value="{{ form.name }}" onInput="{{ onName }}" placeholder="Vor- & Nachname" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;outline:none" /></label>
+                <label style="display:block"><span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Firma (optional)</span><input value="{{ form.firma }}" onInput="{{ onFirma }}" placeholder="Unternehmen" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;outline:none" /></label>
+                <label style="display:block"><span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">E-Mail</span><input value="{{ form.email }}" onInput="{{ onEmail }}" placeholder="name@firma.de" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;outline:none" /></label>
+                <label style="display:block"><span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Telefon</span><input value="{{ form.telefon }}" onInput="{{ onTelefon }}" placeholder="für Rückfragen" style="margin-top:8px;width:100%;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;outline:none" /></label>
+              </div>
+              <label style="display:block;margin-top:16px"><span style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.08em;color:#8593a1;text-transform:uppercase">Nachricht (optional)</span><textarea value="{{ form.nachricht }}" onInput="{{ onNachricht }}" placeholder="Weitere Details zu Ihrem Projekt …" style="margin-top:8px;width:100%;min-height:84px;resize:vertical;border:1px solid rgba(0,16,49,.16);border-radius:4px;padding:13px 14px;font-size:15px;outline:none"></textarea></label>
+              <!-- summary -->
+              <div style="margin-top:20px;background:#f4f7fb;border:1px solid rgba(0,16,49,.08);border-radius:6px;padding:18px 20px">
+                <div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.12em;color:#0D76C7;text-transform:uppercase">Zusammenfassung</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;font-size:14px;color:#1c2935">
+                  <span><b style="color:#8593a1;font-weight:500">Glasart:</b> {{ sumGlasart }}</span>
+                  <span><b style="color:#8593a1;font-weight:500">Maße:</b> {{ sumMasse }}</span>
+                  <span><b style="color:#8593a1;font-weight:500">Stärke:</b> {{ sumStaerke }}</span>
+                  <span><b style="color:#8593a1;font-weight:500">Stück:</b> {{ sumMenge }}</span>
+                  <span style="width:100%"><b style="color:#8593a1;font-weight:500">Bearbeitung:</b> {{ sumBearbeitung }}</span>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+            <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;padding:30px 10px">
+              <div style="width:62px;height:62px;border-radius:50%;background:#0D76C7;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:30px">✓</div>
+              <h2 style="font-family:'Space Grotesk';font-weight:600;font-size:26px;color:#001031;margin:18px 0 0">Vielen Dank, {{ sentName }}!</h2>
+              <p style="font-size:16px;color:#5a6b7d;margin:12px auto 0;max-width:46ch;line-height:1.6">Ihre Anfrage ist bei uns eingegangen. Wir prüfen Ihr Projekt und melden uns zeitnah mit einem individuellen Angebot. <span style="color:#8593a1;font-family:'IBM Plex Mono';font-size:13px;display:block;margin-top:8px">(Demo — es wurde keine Nachricht versendet.)</span></p>
+              <button onClick="{{ resetConfig }}" style="margin-top:24px;background:none;border:1px solid rgba(0,16,49,.18);color:#001031;cursor:pointer;font-weight:500;font-size:14.5px;padding:12px 20px;border-radius:3px">Neue Anfrage</button>
+            </div>
+            </sc-if>
+          </div>
+          </sc-if>
+
+          <!-- nav buttons -->
+          <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:22px;border-top:1px solid rgba(0,16,49,.08)">
+            <button onClick="{{ prevStep }}" style="{{ prevStyle }}">← Zurück</button>
+            <button onClick="{{ nextStep }}" style="{{ nextStyle }}">{{ nextLabel }}</button>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPRESSUM compact -->
+    <section style="max-width:1280px;margin:0 auto;padding:30px 28px 86px">
+      <div style="background:#fff;border:1px solid rgba(0,16,49,.09);border-radius:8px;padding:30px 34px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.14em;color:#0D76C7;text-transform:uppercase">Impressum · Angaben gemäß § 5 TMG</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:18px;font-size:14.5px;color:#33414f;line-height:1.6">
+          <div><b style="color:#001031">Hubert Heinze GmbH</b><br/>Glasfachgroßhandel<br/>Ringstraße 10<br/>04654 Frohburg</div>
+          <div><b style="color:#001031">Geschäftsführer</b><br/>Tilo Zeibig<br/>Tel. +49 34348 556 58<br/>t.zeibig@glashandel-heinze.de</div>
+          <div><b style="color:#001031">Verantwortlich n. § 55 RStV</b><br/>Tilo Zeibig, Anschrift wie nebenstehend.<br/>USt-IdNr. auf Anfrage.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#00081f;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(90deg,rgba(159,195,233,.07) 0 1px,transparent 1px 90px)"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:64px 28px 30px">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px">
+        <div>
+          <img src="assets/logo-white.png" alt="Hubert Heinze GmbH" style="height:62px;width:auto" />
+          <p style="font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.6);margin:18px 0 0;max-width:34ch">Glasfachgroßhandel für Bau und Industrie. Beratung, Fachplanung, Veredelung und Lieferung — aus Frohburg in ganz Mitteldeutschland.</p>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.14em;color:#9FC3E9;text-transform:uppercase;margin-bottom:16px">Navigation</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <button onClick="{{ goHome }}" style="background:none;border:none;color:rgba(255,255,255,.78);cursor:pointer;text-align:left;font-size:14.5px;padding:0" style-hover="color:#fff">Start</button>
+            <button onClick="{{ goUeber }}" style="background:none;border:none;color:rgba(255,255,255,.78);cursor:pointer;text-align:left;font-size:14.5px;padding:0" style-hover="color:#fff">Über uns</button>
+            <button onClick="{{ goLeistungen }}" style="background:none;border:none;color:rgba(255,255,255,.78);cursor:pointer;text-align:left;font-size:14.5px;padding:0" style-hover="color:#fff">Leistungen</button>
+            <button onClick="{{ goReferenzen }}" style="background:none;border:none;color:rgba(255,255,255,.78);cursor:pointer;text-align:left;font-size:14.5px;padding:0" style-hover="color:#fff">Referenzen</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.14em;color:#9FC3E9;text-transform:uppercase;margin-bottom:16px">Glasbereiche</div>
+          <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px;color:rgba(255,255,255,.78)">
+            <span>Basisglas</span><span>Designglas</span><span>Fassadenglas</span><span>Raumglas</span><span>Systemglas</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.14em;color:#9FC3E9;text-transform:uppercase;margin-bottom:16px">Kontakt</div>
+          <div style="font-size:14.5px;color:rgba(255,255,255,.78);line-height:1.7">Ringstraße 10<br/>04654 Frohburg<br/>+49 34348 556 58<br/>t.zeibig@glashandel-heinze.de</div>
+          <button onClick="{{ goAngebot }}" style="margin-top:18px;background:#0D76C7;color:#fff;border:none;cursor:pointer;font-weight:600;font-size:14px;padding:12px 18px;border-radius:3px" style-hover="background:#1685db">Angebot anfragen →</button>
+        </div>
+      </div>
+      <div style="margin-top:48px;padding-top:22px;border-top:1px solid rgba(159,195,233,.16);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:rgba(255,255,255,.5);font-family:'IBM Plex Mono'">
+        <span>© 2026 Hubert Heinze GmbH · Glasfachgroßhandel</span>
+        <span>Frohburg · Sachsen · Made with Klarheit</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860}}">
+class Component extends DCLogic {
+  state = {
+    page: 'home',
+    hero: 'h',
+    step: 1,
+    sent: false,
+    promoVisible: false,
+    statT: 0,
+    form: { glasart:'', anwendung:'', breite:'', hoehe:'', staerke:'', bearbeitung:[], menge:'1', name:'', firma:'', email:'', telefon:'', nachricht:'' }
+  };
+
+  componentDidMount(){
+    try{ this._promoSeen = localStorage.getItem('hh_aufmass_promo') === '1'; }catch(e){ this._promoSeen = false; }
+    if(!this._promoSeen){
+      this._promoTimer = setTimeout(() => {
+        if(!this._promoSeen && this.state.page === 'home'){ this.setState({ promoVisible: true }); }
+      }, 5000);
+    }
+    this._statsCheck = () => {
+      if(this._statsDone) return;
+      const el = document.querySelector('[data-hhstats]');
+      if(!el) return;
+      const r = el.getBoundingClientRect();
+      if(r.top < (window.innerHeight * 0.85) && r.bottom > 60){
+        this._statsDone = true;
+        window.removeEventListener('scroll', this._statsCheck);
+        this.animateStats();
+      }
+    };
+    window.addEventListener('scroll', this._statsCheck, { passive: true });
+    setTimeout(this._statsCheck, 300);
+  }
+  componentWillUnmount(){
+    if(this._promoTimer) clearTimeout(this._promoTimer);
+    if(this._statsCheck) window.removeEventListener('scroll', this._statsCheck);
+  }
+  animateStats(){
+    const dur = 1400, t0 = Date.now();
+    if(this._statsTimer) clearInterval(this._statsTimer);
+    this._statsTimer = setInterval(() => {
+      const t = Math.min(1, (Date.now() - t0) / dur);
+      this.setState({ statT: t });
+      if(t >= 1){ clearInterval(this._statsTimer); this._statsTimer = null; }
+    }, 25);
+  }
+  closePromo(){ try{ localStorage.setItem('hh_aufmass_promo','1'); }catch(e){} this._promoSeen = true; this.setState({ promoVisible: false }); }
+  promoCta(){ this.closePromo(); this.goConfig(); }
+
+  go(page){ this.setState({ page }); try{ window.scrollTo({top:0,behavior:'instant'}); }catch(e){ try{window.scrollTo(0,0);}catch(_){} } }
+  goConfig(){ this.setState({ page:'kontakt', step:1, sent:false }); try{ window.scrollTo({top:0});}catch(e){} }
+
+  setField(k,v){ this.setState(s=>({ form:{...s.form, [k]:v} })); }
+  toggleBearb(name){ this.setState(s=>{ const has=s.form.bearbeitung.includes(name); return { form:{...s.form, bearbeitung: has? s.form.bearbeitung.filter(x=>x!==name): [...s.form.bearbeitung, name]} }; }); }
+
+  next(){ if(this.state.step>=3){ this.setState({ sent:true }); return; } if(this.state.step===1 && !this.state.form.glasart) return; this.setState(s=>({ step: Math.min(3, s.step+1) })); try{window.scrollTo({top:0});}catch(e){} }
+  prev(){ this.setState(s=>({ step: Math.max(1, s.step-1) })); }
+
+  navStyle(active){
+    return 'background:'+(active?'rgba(13,118,199,.1)':'none')+';border:none;cursor:pointer;font-family:IBM Plex Sans,sans-serif;font-weight:'+(active?'600':'500')+';font-size:14.5px;color:'+(active?'#0D76C7':'#33414f')+';padding:10px 14px;border-radius:3px';
+  }
+  swStyle(active){
+    return 'background:'+(active?'#0D76C7':'transparent')+';color:'+(active?'#fff':'#9FC3E9')+';border:1px solid '+(active?'#0D76C7':'rgba(159,195,233,.3)')+';cursor:pointer;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:.04em;padding:7px 12px;border-radius:100px';
+  }
+
+  renderVals(){
+    const s = this.state;
+    const f = s.form;
+
+    const heroCopy = {
+      licht: { headline:'Wir bringen Licht in Ihre Architektur.', sub:'Vom Sicherheitsglas bis zur Ganzglasfassade — wir liefern, veredeln und planen Glas für Bau und Industrie.' },
+      h: { headline:'Glas am Bau & in der Industrie.', sub:'Beratung, Fachplanung und Veredelung aus einer Hand — Ihr Glasfachgroßhandel aus Frohburg.' }
+    }[s.hero] || { headline:'Glas am Bau & in der Industrie.', sub:'Beratung, Fachplanung und Veredelung aus einer Hand — Ihr Glasfachgroßhandel aus Frohburg.' };
+
+    const leistungenData = [
+      { key:'basis', no:'01', label:'BASIS', name:'Basisglas', tagline:'Das Fundament jeder Verglasung.', desc:'Float-, Sicherheits- und Funktionsgläser als Grundlage für nahezu jede Weiterverarbeitung — geprüft, normgerecht und in vielen Formaten lieferbar.', items:['Floatglas','ESG · Einscheibensicherheitsglas','VSG · Verbundsicherheitsglas','Spiegel','Gussglas'] },
+      { key:'design', no:'02', label:'DESIGN', name:'Designglas', tagline:'Glas als Gestaltungselement.', desc:'Dekorative Veredelungen in nahezu unendlicher Vielfalt an Mustern und Farben — für Wandverkleidungen, Möbel und exklusive Innenarchitektur.', items:['Bedrucktes Glas','Emailliertes Glas','Lackiertes Glas','Satiniertes Glas','Geschliffenes Glas','Getöntes Glas'] },
+      { key:'fassade', no:'03', label:'FASSADE', name:'Fassadenglas', tagline:'Schutz, Energie & Architektur.', desc:'Kombinierte Wärme- und Sonnenschutzgläser, die alle Normen ohne Abstriche beim Design erfüllen — bis hin zu kompletten Fassadenelementen.', items:['Sonnenschutz','Wärmedämmung','Schallschutz','Einbruchschutz','Fassadenelemente'] },
+      { key:'raum', no:'04', label:'RAUM', name:'Raumglas', tagline:'Innenräume neu gedacht.', desc:'Glas, das Räumen ein individuelles Erscheinungsbild gibt — von begehbaren Böden über Trennwände bis zu Bädern und Duschen.', items:['Böden & Treppen','Trennwände','Wandverkleidung','Geländer & Brüstungen','Türen & Ganzglasanlagen','Decken','Möbel','Bäder & Duschen'] },
+      { key:'system', no:'05', label:'SYSTEM', name:'Systemglas', tagline:'Komplette Glassysteme.', desc:'Durchdachte Systemlösungen für Türen, Geländer, Trennwände und Duschen — abgestimmte Komponenten aus einer Hand.', items:['Begehbares Glas','Geländersysteme','Ganzglastüren','Drehtüren','Trennwandsysteme','Profilbauglas','Duschsysteme'] }
+    ];
+    const leistungen = leistungenData.map(l => ({ ...l, go: () => this.go('leistungen') }));
+
+    const dreiE = [
+      { e:'Erfahrung', no:'e.01', big:'e', text:'Knowhow aus drei Jahrzehnten Glasfachgroßhandel — Wissen, das in jedem Projekt steckt.' },
+      { e:'Effizienz', no:'e.02', big:'e', text:'Wir finden auf dem schnellsten Weg zu dem für Sie passenden Produkt — ohne Umwege.' },
+      { e:'Entwicklung', no:'e.03', big:'e', text:'Wir analysieren ständig unsere Abläufe und strukturieren Veränderungen gezielt.' }
+    ];
+
+    const statDefs = [
+      { num:30, suffix:'+', l:'Jahre Glaskompetenz' },
+      { num:5,  suffix:'',  l:'Glasbereiche' },
+      { num:40, suffix:'+', l:'Glasarten & Veredelungen' },
+      { num:24, suffix:' h', l:'Reaktion auf Anfragen' }
+    ];
+    const statEase = 1 - Math.pow(1 - s.statT, 3);
+    const stats = statDefs.map(d => ({ v: Math.round(d.num * statEase) + d.suffix, l: d.l }));
+
+    const prozess = [
+      { no:'01', t:'Anfrage & Beratung', d:'Sie schildern Ihr Vorhaben — wir beraten zu Glasart, Norm und Machbarkeit.' },
+      { no:'02', t:'Fachplanung & Bemusterung', d:'Wir planen Aufbau und Veredelung und stellen auf Wunsch Muster bereit.' },
+      { no:'03', t:'Fertigung & Veredelung', d:'Zuschnitt, Härtung, Beschichtung und Bearbeitung nach Ihren Maßen.' },
+      { no:'04', t:'Lieferung & Montage', d:'Termingerechte Lieferung — auf Wunsch inklusive Montagepartner.' }
+    ];
+
+    const referenzen = [
+      { cat:'Fassade', tag:'FASSADENGLAS', t:'Bürogebäude, Leipzig', d:'Pfosten-Riegel-Fassade mit Sonnenschutz-Isolierglas und Schallschutz.' },
+      { cat:'Raum', tag:'SYSTEMGLAS', t:'Ganzglas-Treppe, Villa', d:'Begehbares VSG mit satinierten Stufen und gläsernem Geländer.' },
+      { cat:'Bad', tag:'RAUMGLAS', t:'Walk-in-Dusche, Privat', d:'Rahmenlose Duschtrennwand aus 10 mm ESG mit Klarlack-Veredelung.' },
+      { cat:'Design', tag:'DESIGNGLAS', t:'Empfang, Praxisklinik', d:'Bedruckte Glaswand als Markenträger im Eingangsbereich.' },
+      { cat:'Industrie', tag:'BASISGLAS', t:'Maschinenschutz, Werk', d:'Verbundsicherheitsglas für Sicht- und Schutzverglasungen in der Produktion.' },
+      { cat:'Trennwand', tag:'SYSTEMGLAS', t:'Open Space, Agentur', d:'Ganzglas-Trennwandsystem mit integrierten Drehtüren.' }
+    ];
+
+    // ---- configurator option arrays ----
+    const glasartOptions = leistungenData.map(l => {
+      const sel = f.glasart === l.name;
+      return {
+        name: l.name, desc: l.tagline, selected: sel,
+        select: () => this.setField('glasart', l.name),
+        cardStyle: 'position:relative;text-align:left;cursor:pointer;background:'+(sel?'#eaf3fc':'#fff')+';border:'+(sel?'2px solid #0D76C7':'1px solid rgba(0,16,49,.14)')+';border-radius:6px;padding:'+(sel?'15px 16px':'16px 17px')+';width:100%',
+        dotStyle: 'width:16px;height:16px;border-radius:50%;display:inline-block;border:'+(sel?'5px solid #0D76C7':'2px solid rgba(0,16,49,.2)')
+      };
+    });
+
+    const chip = (active) => 'cursor:pointer;font-size:13.5px;font-weight:500;padding:9px 15px;border-radius:100px;background:'+(active?'#0D76C7':'#f1f5fa')+';color:'+(active?'#fff':'#33414f')+';border:1px solid '+(active?'#0D76C7':'rgba(0,16,49,.12)');
+
+    const staerkeOptions = ['4 mm','6 mm','8 mm','10 mm','12 mm','VSG 8.8'].map(v => {
+      const sel = f.staerke === v;
+      return { name:v, select: () => this.setField('staerke', v), chipStyle: chip(sel) };
+    });
+    const bearbeitungOptions = ['Polierte Kanten','Facettenschliff','Bohrungen','ESG-Härtung','Ausschnitte','Sandstrahl-Motiv'].map(v => {
+      const sel = f.bearbeitung.includes(v);
+      return { name:v, toggle: () => this.toggleBearb(v), chipStyle: chip(sel) };
+    });
+
+    const masse = (f.breite && f.hoehe) ? (f.breite+' × '+f.hoehe+' mm') : '—';
+
+    return {
+      // nav
+      goHome:()=>this.go('home'), goUeber:()=>this.go('ueber'), goLeistungen:()=>this.go('leistungen'),
+      goReferenzen:()=>this.go('referenzen'), goKontakt:()=>this.go('kontakt'), goAngebot:()=>this.goConfig(),
+      navHomeStyle:this.navStyle(s.page==='home'), navUeberStyle:this.navStyle(s.page==='ueber'),
+      navLeistungenStyle:this.navStyle(s.page==='leistungen'), navReferenzenStyle:this.navStyle(s.page==='referenzen'),
+      navKontaktStyle:this.navStyle(s.page==='kontakt'),
+      isHome:s.page==='home', isUeber:s.page==='ueber', isLeistungen:s.page==='leistungen',
+      isReferenzen:s.page==='referenzen', isKontakt:s.page==='kontakt',
+
+      // hero
+      heroLicht:s.hero==='licht', heroH:s.hero==='h',
+      heroKicker:'Hubert Heinze GmbH · Glasfachgroßhandel',
+      heroHeadline:heroCopy.headline, heroSub:heroCopy.sub,
+      setHeroLicht:()=>this.setState({hero:'licht'}), setHeroH:()=>this.setState({hero:'h'}),
+      swLicht:this.swStyle(s.hero==='licht'), swH:this.swStyle(s.hero==='h'),
+
+      // data
+      leistungen, dreiE, stats, prozess, referenzen,
+      promoVisible: s.promoVisible && s.page === 'home',
+      closePromo: () => this.closePromo(),
+      promoCta: () => this.promoCta(),
+      ctaBenefits: ['Unverbindlich & kostenlos','Persönliche Fachberatung','Antwort in 24 Stunden','Alle Glasarten aus einer Hand'],
+      ctaSteps: [
+        { no:'1', t:'Anfrage stellen', d:'Glasart, Maße & Bearbeitung im Konfigurator angeben.' },
+        { no:'2', t:'Angebot erhalten', d:'Individuelles Festpreis-Angebot — geprüft von Tilo Zeibig.' },
+        { no:'3', t:'Liefern lassen', d:'Fertigung, Veredelung und Lieferung termingerecht.' }
+      ],
+
+      // configurator
+      step:s.step, step1:s.step===1, step2:s.step===2, step3:s.step===3,
+      stepLabel:'Schritt '+s.step+' / 3',
+      progress:(s.step/3*100)+'%',
+      glasartOptions, staerkeOptions, bearbeitungOptions,
+      form:f,
+      onBreite:(e)=>this.setField('breite',e.target.value),
+      onHoehe:(e)=>this.setField('hoehe',e.target.value),
+      onMenge:(e)=>this.setField('menge',e.target.value),
+      onAnwendung:(e)=>this.setField('anwendung',e.target.value),
+      onName:(e)=>this.setField('name',e.target.value),
+      onFirma:(e)=>this.setField('firma',e.target.value),
+      onEmail:(e)=>this.setField('email',e.target.value),
+      onTelefon:(e)=>this.setField('telefon',e.target.value),
+      onNachricht:(e)=>this.setField('nachricht',e.target.value),
+      nextStep:()=>this.next(), prevStep:()=>this.prev(),
+      nextLabel: s.step>=3 ? 'Anfrage senden ✓' : 'Weiter →',
+      nextStyle:'background:#0D76C7;color:#fff;border:none;cursor:'+(s.step===1&&!f.glasart?'not-allowed':'pointer')+';opacity:'+(s.step===1&&!f.glasart?'.5':'1')+';font-weight:600;font-size:15px;padding:14px 24px;border-radius:3px',
+      prevStyle:'background:none;border:1px solid rgba(0,16,49,.18);color:#33414f;cursor:pointer;font-weight:500;font-size:15px;padding:14px 22px;border-radius:3px;visibility:'+(s.step===1?'hidden':'visible'),
+      showNav: !s.sent,
+      notSent: !s.sent,
+      sent: s.sent,
+      sentName: f.name || 'für Ihre Anfrage',
+      resetConfig:()=>this.setState({ step:1, sent:false, form:{ glasart:'', anwendung:'', breite:'', hoehe:'', staerke:'', bearbeitung:[], menge:'1', name:'', firma:'', email:'', telefon:'', nachricht:'' } }),
+      sumGlasart: f.glasart || '—',
+      sumMasse: masse,
+      sumStaerke: f.staerke || '—',
+      sumMenge: f.menge || '1',
+      sumBearbeitung: f.bearbeitung.length ? f.bearbeitung.join(', ') : 'keine Angabe'
+    };
+  }
+}
+</script>
+</body>
+</html>
