@@ -26,6 +26,13 @@ export function CookieBanner() {
     } catch {
       /* ignore */
     }
+    // Signal an das Aktions-Pop-up: Banner ist weg, jetzt darf es erscheinen
+    // (verhindert Überlappung beider Banner, v. a. auf dem Smartphone)
+    try {
+      window.dispatchEvent(new Event("hh-consent-set"));
+    } catch {
+      /* ignore */
+    }
     setShow(false);
   };
 

@@ -16,8 +16,32 @@ export function AktionPopup() {
     } catch {
       /* localStorage nicht verfügbar */
     }
-    const t = setTimeout(() => setShow(true), 5000);
-    return () => clearTimeout(t);
+
+    let timer: ReturnType<typeof setTimeout>;
+    const start = () => {
+      timer = setTimeout(() => setShow(true), 5000); // 5 s nach Laden/Consent
+    };
+
+    // Solange das Cookie-Banner noch sichtbar ist, warten wir mit dem Pop-up —
+    // sonst überdecken sich beide (besonders auf dem Smartphone).
+    let consent: string | null = null;
+    try {
+      consent = localStorage.getItem("hh_cookie_consent");
+    } catch {
+      /* ignore */
+    }
+
+    if (consent) {
+      start();
+      return () => clearTimeout(timer);
+    }
+
+    const onConsent = () => start();
+    window.addEventListener("hh-consent-set", onConsent, { once: true });
+    return () => {
+      window.removeEventListener("hh-consent-set", onConsent);
+      clearTimeout(timer);
+    };
   }, []);
 
   const close = () => {
