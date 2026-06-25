@@ -50,7 +50,7 @@ export function Hero() {
           <div className="absolute inset-0 opacity-50 bg-[repeating-linear-gradient(90deg,rgba(159,195,233,.10)_0_1px,transparent_1px_78px),repeating-linear-gradient(0deg,rgba(159,195,233,.07)_0_1px,transparent_1px_78px)]" />
           <div className="absolute -top-[12%] right-[2%] h-[128%] w-[42%] -skew-x-[9deg] border-l border-[rgba(159,195,233,.14)] bg-[linear-gradient(180deg,rgba(13,118,199,.12),transparent_70%)]" />
           <div
-            className="pointer-events-none absolute right-[7%] top-1/2 hidden aspect-[380/764] h-[94%] -translate-y-1/2 md:block"
+            className="pointer-events-none absolute right-[-9%] top-[7%] aspect-[380/764] h-[44%] opacity-40 sm:right-[-2%] sm:h-[58%] sm:opacity-60 md:right-[7%] md:top-1/2 md:h-[94%] md:-translate-y-1/2 md:opacity-100"
             style={{ ["--m" as string]: MASK }}
           >
             <div className="absolute -inset-x-[14%] -inset-y-[8%] bg-[radial-gradient(58%_56%_at_50%_42%,rgba(13,118,199,.42),transparent_72%)] blur-[24px]" />
